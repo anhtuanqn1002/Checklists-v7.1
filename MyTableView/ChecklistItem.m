@@ -17,9 +17,24 @@
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         dateFormatter.dateFormat = @"MMM dd, yyyy";
         self.dueDate = [dateFormatter dateFromString:date];
-        self.description = @"details...";
+        self.descriptionItem = @"details...";
     }
     return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super init]) {
+        self.title = [aDecoder decodeObjectForKey:@"TITLE"];
+        self.dueDate = [aDecoder decodeObjectForKey:@"DUE_DATE"];
+        self.descriptionItem = [aDecoder decodeObjectForKey:@"DESCRIPTION"];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.title forKey:@"TITLE"];
+    [aCoder encodeObject:self.dueDate forKey:@"DUE_DATE"];
+    [aCoder encodeObject:self.descriptionItem forKey:@"DESCRIPTION"];
 }
 
 @end

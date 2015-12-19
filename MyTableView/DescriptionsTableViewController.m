@@ -1,23 +1,22 @@
 //
-//  AddTableViewController.m
+//  DescriptionsTableViewController.m
 //  MyTableView
 //
-//  Created by Anh Tuan on 11/30/15.
+//  Created by Anh Tuan on 12/8/15.
 //  Copyright (c) 2015 Nguyen Van Anh Tuan. All rights reserved.
 //
 
-#import "AddTableViewController.h"
+#import "DescriptionsTableViewController.h"
 #import "ChecklistItem.h"
+@interface DescriptionsTableViewController ()
 
-@interface AddTableViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *titleText;
+@property (weak, nonatomic) IBOutlet UILabel *descriptionText;
 
-@property (weak, nonatomic) IBOutlet UITextField *titleTextField;
-@property (weak, nonatomic) IBOutlet UIDatePicker *dueDatePicker;
-@property (weak, nonatomic) IBOutlet UITextField *descriptionTextField;
 
 @end
 
-@implementation AddTableViewController
+@implementation DescriptionsTableViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -37,11 +36,9 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    if (self.editItem != nil) {
-        self.titleTextField.text = self.editItem.title;
-        self.dueDatePicker.date = self.editItem.dueDate;
-        self.descriptionTextField.text = self.editItem.descriptionItem;
+    if (self.transferItem != nil) {
+        self.titleText.text = [self.transferItem title];
+        self.descriptionText.text = [self.transferItem descriptionItem];
     }
 }
 
@@ -65,40 +62,16 @@
     return 1;
 }
 
-- (IBAction)done:(id)sender {
-    if (self.editItem == nil) {
-        ChecklistItem *item = [[ChecklistItem alloc] init];
-        item.title = self.titleTextField.text;
-        item.dueDate = self.dueDatePicker.date;
-        item.descriptionItem = self.descriptionTextField.text;
-        [self.delegate addItem:item];
-    } else {
-        self.editItem.title = self.titleTextField.text;
-        self.editItem.dueDate = self.dueDatePicker.date;
-        self.editItem.descriptionItem = self.descriptionTextField.text;
-        [self.delegate editItem:self.editItem];
-    }
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (IBAction)cancel:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    return 363;
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"decriptionCell" forIndexPath:indexPath];
+//    
+//    // Configure the cell...
+//    
+//    
+//    return cell;
 //}
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
-}
-*/
 
 /*
 // Override to support conditional editing of the table view.
@@ -138,20 +111,15 @@
 }
 */
 
-
-//#pragma mark - Navigation
+/*
+#pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-//{
-//    // Get the new view controller using [segue destinationViewController].
-//    // Pass the selected object to the new view controller.
-//    if ([segue.identifier isEqualToString:@"addItem"]) {
-//        NSLog(@"Add item");
-//    } else if ([segue.identifier isEqualToString:@"editItem"]) {
-//        NSLog(@"Edit item");
-//    }
-//}
-
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 @end

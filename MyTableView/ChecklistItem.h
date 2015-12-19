@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ChecklistItem : NSObject
+@interface ChecklistItem : NSObject<NSCoding>
 
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSDate *dueDate;
-@property (nonatomic, strong) NSString *description;
+@property (nonatomic, strong) NSString *descriptionItem;
 
 @end
