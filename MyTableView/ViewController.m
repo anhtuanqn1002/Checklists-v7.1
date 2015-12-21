@@ -22,11 +22,12 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    self.listItems = [[NSMutableArray alloc] init];
+
 //    ChecklistItem *item = [[ChecklistItem alloc] init];
 //    [item setTitle:@"item 1"];
 //    [self.listItems addObject:item];
 //    [self.listItems addObject:item];
+    self.listItems = [[NSMutableArray alloc] init];
     [self loadData];
 }
 
@@ -130,8 +131,10 @@
 - (void)loadData {
     NSString *filePath = [[self dataPath] stringByAppendingPathComponent:@"data.plist"];
     NSData *data = [[NSMutableData alloc] initWithContentsOfFile:filePath];
-    NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
-    self.listItems = [unarchiver decodeObjectForKey:@"listItems"];
-    [unarchiver finishDecoding];
+    if (data != nil) {
+        NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+        self.listItems = [unarchiver decodeObjectForKey:@"listItems"];
+        [unarchiver finishDecoding];
+    }
 }
 @end
