@@ -27,6 +27,8 @@
 //    [item setTitle:@"item 1"];
 //    [self.listItems addObject:item];
 //    [self.listItems addObject:item];
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:nil];
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
     self.listItems = [[NSMutableArray alloc] init];
     [self loadData];
 }
@@ -137,4 +139,25 @@
         [unarchiver finishDecoding];
     }
 }
+
+#pragma mark - Moving row to newlocation
+
+//can move or can't move
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+//move data
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+    ChecklistItem *itemToMove = [self.listItems objectAtIndex:sourceIndexPath.row];
+    [self.listItems removeObjectAtIndex:sourceIndexPath.row];
+    [self.listItems insertObject:itemToMove atIndex:destinationIndexPath.row];
+    [self saveData];
+}
+
+
+//- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath {
+//    return proposedDestinationIndexPath;
+//}
+
 @end
